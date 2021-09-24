@@ -54,22 +54,8 @@ function deploy() {
             .command(`${command}`)
             .description(`${underlineLog(projectName)}项目${underlineLog(name)}部署`)
             .action(() => {
-                inquirer.prompt([
-                    {
-                        type: 'confirm',
-                        message: `${underlineLog(projectName)}项目是否部署到${underlineLog(name)}？`,
-                        name: 'sure'
-                    }
-                ]).then(answers => {
-                    const { sure } = answers;
-                    if (!sure) {
-                        process.exit(1);
-                    }
-                    if (sure) {
-                        const deploy = require('../lib/deploy');
-                        deploy(config);
-                    }
-                });
+                const deploy = require('../lib/deploy');
+                deploy(config);
 
             });
     });
